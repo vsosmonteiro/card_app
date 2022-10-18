@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.only(top: 48.0, left: 0, right: 0),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height - 120),
+              maxHeight: MediaQuery.of(context).size.height - 80),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -130,7 +130,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(left: 12, top: 12, right: 12),
+                        margin:
+                            const EdgeInsets.only(left: 12, top: 12, right: 24),
                         child: Row(
                           children: const [
                             Text(
@@ -149,13 +150,10 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                      Container(
-                        child: Row(
-                          children: const [
-                            CircleAvatar(backgroundColor: Colors.red,)
-                          ],
-                        ),
-                      )
+                      _purchasesContainer(),
+                      _purchasesContainer(),
+                      _purchasesContainer()
+
                     ],
                   ),
                 ),
@@ -167,6 +165,40 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Container _purchasesContainer() {
+    return Container(
+                      margin: EdgeInsets.only(left: 12, top: 12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(
+                            radius: 28,
+                            child: Image.asset('assets/images/amazon.png'),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Amazon',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20)),
+                              Text('22  February  2022',
+                                  style: TextStyle(
+                                      color: Colors.white70, fontSize: 16))
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(right: 20 ),
+                            child: Text(
+                              ' - \$28.00',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+  }
+
   Column _circleIcon(Icon icon, String text) {
     return Column(
       children: [
@@ -175,8 +207,8 @@ class _HomePageState extends State<HomePage> {
           margin: const EdgeInsets.only(top: 4),
           child: Text(
             text,
-            style:
-                const TextStyle(color: Colors.white, fontSize: 16, letterSpacing: 2),
+            style: const TextStyle(
+                color: Colors.white, fontSize: 16, letterSpacing: 2),
           ),
         )
       ],
