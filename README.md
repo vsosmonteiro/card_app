@@ -1,5 +1,5 @@
 # card_app_v01
-![Alt text](/assets/images/Captura de tela de 2022-10-18 01-04-24.png "Optional title")
+![Alt text](../assets/images/Captura de tela de 2022-10-18 01-04-24.png "Optional title")
 A new Flutter project.
 
 ## Getting Started
