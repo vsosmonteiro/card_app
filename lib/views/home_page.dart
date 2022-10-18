@@ -12,6 +12,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       backgroundColor: Colors.black,
       body: _body(),
       bottomNavigationBar: _bottomAppBar(),
@@ -20,19 +21,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  BottomAppBar _bottomAppBar() {
-    return BottomAppBar(
-      color: Colors.grey,
-      child: Container(
-        height: 80,
-        decoration: const BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(28),
-          ),
+  Container _bottomAppBar() {
+    return Container(
+      height: 80,
+      decoration: const BoxDecoration(
+        color: Color(0xff000066),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(28),
         ),
-        child: _bottomapprow(),
       ),
+      child: _bottomapprow(),
     );
   }
 
@@ -40,126 +38,118 @@ class _HomePageState extends State<HomePage> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 48.0, left: 0, right: 0),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height - 80),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.only(bottom: 24.0, left: 12, right: 12),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 32,
-                      backgroundColor: Colors.blue,
-                      child: Image.asset('assets/images/avatar1.png'),
-                    ),
-                    const Spacer(),
-                  ],
-                ),
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(bottom: 24.0, left: 12, right: 12),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 32,
+                    backgroundColor: Colors.blue,
+                    child: Image.asset('assets/images/avatar1.png'),
+                  ),
+                  const Spacer(),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  children: const [
-                    Text('My cards',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 36,
-                            fontWeight: FontWeight.w500)),
-                    Spacer(),
-                    Text(
-                      'Add +',
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                children: const [
+                  Text('My cards',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w400),
-                    )
-                  ],
+                          fontSize: 36,
+                          fontWeight: FontWeight.w500)),
+                  Spacer(),
+                  Text(
+                    'Add +',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w400),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 1, right: 1, top: 10),
+              height: 200,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  CardWidget(),
+                  CardWidget(),
+                  CardWidget(),
+                  CardWidget()
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0, bottom: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _circleIcon(const Icon(Icons.add), 'Add'),
+                  _circleIcon(
+                      const Icon(Icons.arrow_downward_outlined), 'Send'),
+                  _circleIcon(
+                      const Icon(Icons.arrow_upward_outlined), 'Receive'),
+                  _circleIcon(const Icon(Icons.menu), 'Menu')
+                ],
+              ),
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFF222222),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(40),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 1, right: 1, top: 10),
-                height: 200,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                    CardWidget(),
-                    CardWidget(),
-                    CardWidget(),
-                    CardWidget()
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12.0, bottom: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _circleIcon(const Icon(Icons.add), 'Add'),
-                    _circleIcon(
-                        const Icon(Icons.arrow_downward_outlined), 'Send'),
-                    _circleIcon(
-                        const Icon(Icons.arrow_upward_outlined), 'Receive'),
-                    _circleIcon(const Icon(Icons.menu), 'Menu')
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  height: 100,
-                  decoration: const BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(6)),
+                      margin: const EdgeInsets.only(top: 20),
+                      height: 6,
+                      width: 40,
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(6)),
-                          margin: const EdgeInsets.only(top: 20),
-                          height: 6,
-                          width: 40,
+                  Container(
+                    margin:
+                        const EdgeInsets.only(left: 12, top: 12, right: 24),
+                    child: Row(
+                      children: const [
+                        Text(
+                          'Last Transactions',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 28,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 2),
                         ),
-                      ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: 12, top: 12, right: 24),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'Last Transactions',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 2),
-                            ),
-                            Spacer(),
-                            Text(
-                              'View All',
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
-                        ),
-                      ),
-                      _purchasesContainer(),
-                      _purchasesContainer(),
-                      _purchasesContainer()
-
-                    ],
+                        Spacer(),
+                        Text(
+                          'View All',
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
+                  _purchasesContainer(),
+                  _purchasesContainer(),
+                  _purchasesContainer(),
+                  SizedBox(height: 120,)
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -167,36 +157,33 @@ class _HomePageState extends State<HomePage> {
 
   Container _purchasesContainer() {
     return Container(
-                      margin: EdgeInsets.only(left: 12, top: 12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CircleAvatar(
-                            radius: 28,
-                            child: Image.asset('assets/images/amazon.png'),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Amazon',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20)),
-                              Text('22  February  2022',
-                                  style: TextStyle(
-                                      color: Colors.white70, fontSize: 16))
-                            ],
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(right: 20 ),
-                            child: Text(
-                              ' - \$28.00',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
+      margin: EdgeInsets.only(left: 12, top: 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CircleAvatar(
+            radius: 28,
+            child: Image.asset('assets/images/amazon.png'),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Amazon',
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              Text('22  February  2022',
+                  style: TextStyle(color: Colors.white70, fontSize: 16))
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.only(right: 20),
+            child: Text(
+              ' - \$28.00',
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Column _circleIcon(Icon icon, String text) {
