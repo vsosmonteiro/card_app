@@ -97,19 +97,22 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   }
-                  if (state is LoadingCardState) {
-                    return ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: const [
-                        CardLoadingWidget(),
-                        CardLoadingWidget(),
-                        CardLoadingWidget()
-                      ],
-                    );
+                  if (state is LoadedCardState) {
+
+                    return ListView.builder(
+                        itemCount: state.list.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return CardWidget();});
                   }
-                  return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => CardWidget());
+
+                  return ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                  CardLoadingWidget(),
+                  CardLoadingWidget(),
+                  CardLoadingWidget()
+                  ]);
                 },
               ),
             ),

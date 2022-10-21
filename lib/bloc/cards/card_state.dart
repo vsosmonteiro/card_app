@@ -15,7 +15,7 @@ class ErrorCardState extends CardState{
 }
 
 class LoadedCardState extends CardState{
-  final  list;
+  var  list=[];
   LoadedCardState({required this.list});
 
 }
