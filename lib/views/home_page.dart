@@ -1,5 +1,9 @@
+import 'package:card_app_v01/bloc/cards/card_bloc.dart';
+import 'package:card_app_v01/bloc/cards/card_state.dart';
+import 'package:card_app_v01/widgets/card_loading_widget.dart';
 import 'package:card_app_v01/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -41,8 +45,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 24.0, left: 12, right: 12),
+              padding: const EdgeInsets.only(bottom: 24.0, left: 12, right: 12),
               child: Row(
                 children: [
                   CircleAvatar(
@@ -77,14 +80,37 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: const EdgeInsets.only(left: 1, right: 1, top: 10),
               height: 200,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: const [
-                  CardWidget(),
-                  CardWidget(),
-                  CardWidget(),
-                  CardWidget()
-                ],
+              child: BlocBuilder<CardBloc, CardState>(
+                bloc: BlocProvider.of<CardBloc>(context),
+                builder: (context, state) {
+                  if (state is ErrorCardState) {
+                    return Center(
+                      child: Text(state.message,
+                          style: TextStyle(color: Colors.white)),
+                    );
+                  }
+                  if (state is LoadedEmpyCardState) {
+                    return Center(
+                      child: Text(
+                        'nao tem cartoes cadastrados',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }
+                  if (state is LoadingCardState) {
+                    return ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: const [
+                        CardLoadingWidget(),
+                        CardLoadingWidget(),
+                        CardLoadingWidget()
+                      ],
+                    );
+                  }
+                  return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => CardWidget());
+                },
               ),
             ),
             Padding(
@@ -122,8 +148,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container(
-                    margin:
-                        const EdgeInsets.only(left: 12, top: 12, right: 24),
+                    margin: const EdgeInsets.only(left: 12, top: 12, right: 24),
                     child: Row(
                       children: const [
                         Text(
@@ -145,7 +170,9 @@ class _HomePageState extends State<HomePage> {
                   _purchasesContainer(),
                   _purchasesContainer(),
                   _purchasesContainer(),
-                  SizedBox(height: 120,)
+                  SizedBox(
+                    height: 120,
+                  )
                 ],
               ),
             )
@@ -167,7 +194,7 @@ class _HomePageState extends State<HomePage> {
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text('Amazon',
                   style: TextStyle(color: Colors.white, fontSize: 20)),
               Text('22  February  2022',
