@@ -86,11 +86,11 @@ class _HomePageState extends State<HomePage> {
                   if (state is ErrorCardState) {
                     return Center(
                       child: Text(state.message,
-                          style: TextStyle(color: Colors.white)),
+                          style: const TextStyle(color: Colors.white)),
                     );
                   }
                   if (state is LoadedEmpyCardState) {
-                    return Center(
+                    return const Center(
                       child: Text(
                         'nao tem cartoes cadastrados',
                         style: TextStyle(color: Colors.white),
@@ -103,7 +103,8 @@ class _HomePageState extends State<HomePage> {
                         itemCount: state.list.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return CardWidget();});
+                          print(state.list[index].name);
+                          return CardWidget(name:state.list[index].name ,expiration: state.list[index].expiration,number: state.list[index].number,);});
                   }
 
                   return ListView(
@@ -173,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                   _purchasesContainer(),
                   _purchasesContainer(),
                   _purchasesContainer(),
-                  SizedBox(
+                  const SizedBox(
                     height: 120,
                   )
                 ],
@@ -187,7 +188,7 @@ class _HomePageState extends State<HomePage> {
 
   Container _purchasesContainer() {
     return Container(
-      margin: EdgeInsets.only(left: 12, top: 12),
+      margin: const EdgeInsets.only(left: 12, top: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -205,8 +206,8 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(right: 20),
-            child: Text(
+            margin: const EdgeInsets.only(right: 20),
+            child: const Text(
               ' - \$28.00',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),

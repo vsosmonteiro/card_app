@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CardWidget extends StatefulWidget {
-  const CardWidget({Key? key}) : super(key: key);
+  final String number;
+  final String name;
+  final String expiration;
+  const CardWidget({super.key, required this.name,required this.number,required this.expiration});
+
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -32,28 +36,28 @@ class _CardWidgetState extends State<CardWidget> {
               style: TextStyle(color: Colors.white, fontSize: 28),
             ),
           ),
-          const Positioned(
+           Positioned(
             right: 20,
             top: 24,
             child: Text(
-              '**** **** 4677',
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              widget.number,
+              style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
-          const Positioned(
+           Positioned(
             bottom: 60,
             left: 20,
             child: Text(
-              'Victor F S Monteiro',
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              widget.name,
+              style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
-          const Positioned(
+           Positioned(
               left: 24,
               bottom: 24,
               child: Text(
-                '10/27',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                widget.expiration,
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ))
         ],
       ),
