@@ -15,14 +15,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider<CardBloc>(
+      create: (BuildContext context)=>CardBloc()..add(CardFetchList()),
+      child: MaterialApp(
+        routes: {'/home':(context)=>const HomePage() },
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/home',
       ),
-      home: BlocProvider<CardBloc>(
-        create: (BuildContext context)=>CardBloc()..add(CardFetchList()),
-          child: const HomePage()),
     );
   }
 }
