@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               margin: const EdgeInsets.only(left: 1, right: 1, top: 10),
               height: 200,
               child: BlocBuilder<CardBloc, CardState>(
-                bloc: BlocProvider.of<CardBloc>(context),
+                buildWhen: (previous, current) => previous != current,
                 builder: (context, state) {
                   if (state is ErrorCardState) {
                     return Center(
@@ -98,22 +98,25 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                   if (state is LoadedCardState) {
-
                     return ListView.builder(
                         itemCount: state.list.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          print(state.list[index].name);
-                          return CardWidget(name:state.list[index].name ,expiration: state.list[index].expiration,number: state.list[index].number,);});
+                          return CardWidget(
+                            name: state.list[index].name,
+                            expiration: state.list[index].expiration,
+                            number: state.list[index].number,
+                          );
+                        });
                   }
 
                   return ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                  CardLoadingWidget(),
-                  CardLoadingWidget(),
-                  CardLoadingWidget()
-                  ]);
+                      scrollDirection: Axis.horizontal,
+                      children: const [
+                        CardLoadingWidget(),
+                        CardLoadingWidget(),
+                        CardLoadingWidget()
+                      ]);
                 },
               ),
             ),

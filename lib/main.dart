@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<CardBloc>(
-      create: (BuildContext context)=>CardBloc()..add(CardFetchList()),
+      create: (BuildContext context) => CardBloc()..add(CardFetchList()),
       child: MaterialApp(
-        routes: {'/home':(context)=>const HomePage() },
+        routes: {'/home': (context) => const HomePage()},
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -28,5 +28,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
